@@ -6,6 +6,14 @@ exports.getUsers = (req, res, next) => {
     .catch(next);
 };
 
-exports.createUser = (req, res) => {
-  res.send(req.body);
+exports.getUserById = (req, res, next) => {
+  User.findById(req.params.userId)
+    .then((user) => res.send({ data: user }))
+    .catch((err) => res.status(500).send({ message: err.message }))
+    .catch(next);
+};
+
+exports.createUser = async (req, res) => {
+  const user = new User(req.body);
+  res.send(await user.save());
 };

@@ -11,7 +11,6 @@ const cardSchema = mongoose.Schema({
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 30,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

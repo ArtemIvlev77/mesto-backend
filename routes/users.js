@@ -1,16 +1,14 @@
 const express = require('express');
+const { getUsers, createUser, getUserById } = require('../controllers/users');
 
-const usersRoutes = express.Router();
+const usersRoute = express.Router();
 
-usersRoutes.get('/', (req, res) => {
-  res.send('Hello world');
-});
+usersRoute.get('/', getUsers);
 
-usersRoutes.post('/', express.json(), (req, res, next) => {
-  res.send(req.body);
-  next();
-});
+usersRoute.get('/:userId', getUserById);
+
+usersRoute.post('/', createUser);
 
 module.exports = {
-  usersRoutes,
+  usersRoute,
 };
