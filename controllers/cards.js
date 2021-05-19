@@ -1,8 +1,9 @@
 const { Card } = require('../models/card');
 
-exports.getCards = (req, res, next) => Card.find({})
-  .then((cards) => res.status(200).send(cards))
-  .catch(next);
+exports.getCards = (req, res, next) =>
+  Card.find({})
+    .then((cards) => res.status(200).send(cards))
+    .catch(next);
 
 exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
@@ -52,7 +53,7 @@ exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
     req.params.cardId,
     { $pull: { likes: owner } },
-    { new: true },
+    { new: true }
   )
     .then((card) => res.status(200).send(card))
     .catch((err) => {
